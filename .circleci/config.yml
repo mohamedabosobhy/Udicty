@@ -16,6 +16,9 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - run: echo sobhy
+      - run:
+          name: "What branch am I on now?"
+          command: echo $CIRCLE_BRANCH
 workflows:
   # Name the workflow "welcome"
   welcome:
