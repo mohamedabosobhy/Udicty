@@ -6,7 +6,12 @@ orbs:
   welcome: circleci/welcome-orb@0.4.1
   slack: circleci/slack@4.1
 # Orchestrate or schedule a set of jobs
-
+commands:
+  notify_slack_fail:
+    - slack/notify:
+          event: fail
+          channel: test
+          template: basic_fail_1
 jobs:
   print_hello:
     docker:
@@ -21,10 +26,7 @@ jobs:
       - run:
           name: "What branch am I on now?"
           command: echo $CIRCLE_BRANCH
-      - slack/notify:
-          event: fail
-          channel: test
-          template: basic_fail_1
+      - notify_slack_fail
 workflows:
   # Name the workflow "welcome"
   welcome:
